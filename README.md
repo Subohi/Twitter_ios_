@@ -16,6 +16,9 @@ The following **required** functionality is completed:
 
 Here's a walkthrough of implemented user stories:
 
+![](https://i.imgur.com/MdQ4hlH.gif)
+![](https://i.imgur.com/mHIqlfJ.gif)
+
 
 # Project 3 - Twitter
 
