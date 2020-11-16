@@ -20,6 +20,11 @@ class HomeTableTableViewController: UITableViewController {
     
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.viewDidLoad()
+    }
+    
     func loadTweet(){
         
         let myURL = "https://api.twitter.com/1.1/statuses/home_timeline.json"
@@ -37,6 +42,7 @@ class HomeTableTableViewController: UITableViewController {
             
         }, failure: {(Error) in
             print("Could not retreive tweets!")
+            print(Error.localizedDescription)
             
         })
     
@@ -48,7 +54,7 @@ class HomeTableTableViewController: UITableViewController {
     @IBAction func onLogout(_ sender: Any) {
         TwitterAPICaller.client?.logout()
         self.dismiss(animated: true, completion: nil)
-        UserDefaults.standard.set(false,forKey: "userLoggedIn")
+        UserDefaults.standard.set(false,forKey: "userloggedin")
         
     }
     
@@ -67,6 +73,11 @@ class HomeTableTableViewController: UITableViewController {
         if let imageData = data {
             cell.profileImageView.image = UIImage(data: imageData)
         }
+        
+        cell.setFavorite(tweetArray[indexPath.row]["favorited"] as! Bool)
+        cell.tweetId = tweetArray[indexPath.row]["id"] as! Int
+        cell.setRetweeted(tweetArray[indexPath.row]["retweeted"] as! Bool)
+        
         
         return cell
     }
